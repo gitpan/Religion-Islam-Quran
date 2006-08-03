@@ -1,0 +1,13 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Religion-Islam-Quran.t
+lib/Religion/Islam/Quran.pm
+lib/Religion/Islam/Quran/QuranArabic.txt
+lib/Religion/Islam/Quran/QuranArabicUnicode.txt
+lib/Religion/Islam/Quran/QuranEnglish.txt
+lib/Religion/Islam/Quran/QuranFrench.txt
+lib/Religion/Islam/Quran/QuranGerman.txt
+lib/Religion/Islam/Quran/QuranSpanish.txt
+META.yml                                 Module meta-data (added by MakeMaker)
