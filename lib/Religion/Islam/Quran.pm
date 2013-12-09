@@ -1,11 +1,10 @@
 #=Copyright Infomation
 #==========================================================
-#Module Name      : Religion::Islam::Quran
-#Program Author   : Ahmed Amin Elsheshtawy
-#Home Page          : http://www.islamware.com
-#Contact Email      : support@islamware.com
-#Copyrights � 2006 IslamWare. All rights reserved.
-#==========================================================
+#Module Name       : Religion::Islam::Quran
+#Program Author   : Dr. Ahmed Amin Elsheshtawy, Ph.D. Physics, E.E.
+#Home Page           : http://www.islamware.com, http://www.mewsoft.com
+#Contact Email      : support@islamware.com, support@mewsoft.com
+#Copyrights © 2006-2013 IslamWare. All rights reserved.
 #==========================================================
 package Religion::Islam::Quran;
 
@@ -17,11 +16,11 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw();
 
-our $VERSION = '1.0';
+our $VERSION = '2.0';
 our %quran;
-our %SurahNameArabicUnicode;
 our %OrderOfRevelation;
 our @QuranLanguages;
+our %surah_name;
 #==========================================================
 our %SajdahCompulsaryAyats = (
 														32 => 15, 	#Surah 32 as-Sajdah / Ayat 15
@@ -161,124 +160,125 @@ our %SajdahRecommendedAyats = (
 								114=>21
 								);
 
-%SurahNameArabicUnicode = (
-								1 => "&#1575;&#1604;&#1601;&#1575;&#1578;&#1581;&#1577;",
-								2 => "&#1575;&#1604;&#1576;&#1602;&#1585;&#1577;",
-								3 => "&#1575;&#1604; &#1593;&#1605;&#1585;&#1575;&#1606;",
-								4 => "&#1575;&#1604;&#1606;&#1587;&#1575;&#1569;",
-								5 => "&#1575;&#1604;&#1605;&#1575;&#1574;&#1583;&#1577;",
-								6 => "&#1575;&#1604;&#1575;&#1606;&#1593;&#1575;&#1605;",
-								7 => "&#1575;&#1604;&#1575;&#1593;&#1585;&#1575;&#1601;",
-								8 => "&#1575;&#1604;&#1575;&#1606;&#1601;&#1575;&#1604;",
-								9 => "&#1575;&#1604;&#1578;&#1608;&#1576;&#1577;",
-								10 => "&#1610;&#1608;&#1606;&#1587;",
-								11 => "&#1607;&#1608;&#1583;",
-								12 => "&#1610;&#1608;&#1587;&#1601;",
-								13 => "&#1575;&#1604;&#1585;&#1593;&#1583;",
-								14 => "&#1575;&#1576;&#1585;&#1575;&#1607;&#1610;&#1605;",
-								15 => "&#1575;&#1604;&#1581;&#1580;&#1585;",
-								16 => "&#1575;&#1604;&#1606;&#1581;&#1604;",
-								17 => "&#1575;&#1604;&#1575;&#1587;&#1585;&#1575;&#1569;",
-								18 => "&#1575;&#1604;&#1603;&#1607;&#1601;",
-								19 => "&#1605;&#1585;&#1610;&#1605;",
-								20 => "&#1591;&#1607;",
-								21 => "&#1575;&#1604;&#1575;&#1606;&#1576;&#1610;&#1575;&#1569;",
-								22 => "&#1575;&#1604;&#1581;&#1580;",
-								23 => "&#1575;&#1604;&#1605;&#1572;&#1605;&#1606;&#1608;&#1606;",
-								24 => "&#1575;&#1604;&#1606;&#1608;&#1585;",
-								25 => "&#1575;&#1604;&#1601;&#1585;&#1602;&#1575;&#1606;",
-								26 => "&#1575;&#1604;&#1588;&#1593;&#1585;&#1575;&#1569;",
-								27 => "&#1575;&#1604;&#1606;&#1605;&#1604;",
-								28 => "&#1575;&#1604;&#1602;&#1589;&#1589;",
-								29 => "&#1575;&#1604;&#1593;&#1606;&#1603;&#1576;&#1608;&#1578;",
-								30 => "&#1575;&#1604;&#1585;&#1608;&#1605;",
-								31 => "&#1604;&#1602;&#1605;&#1575;&#1606;",
-								32 => "&#1575;&#1604;&#1587;&#1580;&#1583;&#1577;",
-								33 => "&#1575;&#1604;&#1575;&#1581;&#1586;&#1575;&#1576;",
-								34 => "&#1587;&#1576;&#1571;",
-								35 => "&#1601;&#1575;&#1591;&#1585;",
-								36 => "&#1610;&#1587;",
-								37 => "&#1575;&#1604;&#1589;&#1575;&#1601;&#1575;&#1578;",
-								38 => "&#1589;",
-								39 => "&#1575;&#1604;&#1586;&#1605;&#1585;",
-								40 => "&#1594;&#1575;&#1601;&#1585;",
-								41 => "&#1601;&#1589;&#1604;&#1578;",
-								42 => "&#1575;&#1604;&#1588;&#1608;&#1585;&#1609;",
-								43 => "&#1575;&#1604;&#1586;&#1582;&#1585;&#1601;",
-								44 => "&#1575;&#1604;&#1583;&#1582;&#1575;&#1606;",
-								45 => "&#1575;&#1604;&#1580;&#1575;&#1579;&#1610;&#1577;",
-								46 => "&#1575;&#1604;&#1575;&#1581;&#1602;&#1575;&#1601;",
-								47 => "&#1605;&#1581;&#1605;&#1583;",
-								48 => "&#1575;&#1604;&#1601;&#1578;&#1581;",
-								49 => "&#1575;&#1604;&#1581;&#1580;&#1585;&#1575;&#1578;",
-								50 => "&#1602;",
-								51 => "&#1575;&#1604;&#1584;&#1575;&#1585;&#1610;&#1575;&#1578;",
-								52 => "&#1575;&#1604;&#1591;&#1608;&#1585;",
-								53 => "&#1575;&#1604;&#1606;&#1580;&#1605;",
-								54 => "&#1575;&#1604;&#1602;&#1605;&#1585;",
-								55 => "&#1575;&#1604;&#1585;&#1581;&#1605;&#1606;",
-								56 => "&#1575;&#1604;&#1608;&#1575;&#1602;&#1593;&#1577;",
-								57 => "&#1575;&#1604;&#1581;&#1583;&#1610;&#1583;",
-								58 => "&#1575;&#1604;&#1605;&#1580;&#1575;&#1583;&#1604;&#1577;",
-								59 => "&#1575;&#1604;&#1581;&#1588;&#1585;",
-								60 => "&#1575;&#1604;&#1605;&#1605;&#1578;&#1581;&#1606;&#1577;",
-								61 => "&#1575;&#1604;&#1589;&#1601;",
-								62 => "&#1575;&#1604;&#1580;&#1605;&#1593;&#1577;",
-								63 => "&#1575;&#1604;&#1605;&#1606;&#1575;&#1601;&#1602;&#1608;&#1606;",
-								64 => "&#1575;&#1604;&#1578;&#1594;&#1575;&#1576;&#1606;",
-								65 => "&#1575;&#1604;&#1591;&#1604;&#1575;&#1602;",
-								66 => "&#1575;&#1604;&#1578;&#1581;&#1585;&#1610;&#1605;",
-								67 => "&#1575;&#1604;&#1605;&#1604;&#1603;",
-								68 => "&#1575;&#1604;&#1602;&#1604;&#1605;",
-								69 => "&#1575;&#1604;&#1581;&#1575;&#1602;&#1577;",
-								70 => "&#1575;&#1604;&#1605;&#1593;&#1575;&#1585;&#1580;",
-								71 => "&#1606;&#1608;&#1581;",
-								72 => "&#1575;&#1604;&#1580;&#1606;",
-								73 => "&#1575;&#1604;&#1605;&#1586;&#1605;&#1604;",
-								74 => "&#1575;&#1604;&#1605;&#1583;&#1579;&#1585;",
-								75 => "&#1575;&#1604;&#1602;&#1610;&#1575;&#1605;&#1577;",
-								76 => "&#1575;&#1604;&#1575;&#1606;&#1587;&#1575;&#1606;",
-								77 => "&#1575;&#1604;&#1605;&#1585;&#1587;&#1604;&#1575;&#1578;",
-								78 => "&#1575;&#1604;&#1606;&#1576;&#1575;",
-								79 => "&#1575;&#1604;&#1606;&#1575;&#1586;&#1593;&#1575;&#1578;",
-								80 => "&#1593;&#1576;&#1587;",
-								81 => "&#1575;&#1604;&#1578;&#1603;&#1608;&#1610;&#1585;",
-								82 => "&#1575;&#1604;&#1575;&#1606;&#1601;&#1591;&#1575;&#1585;",
-								83 => "&#1575;&#1604;&#1605;&#1591;&#1601;&#1601;&#1610;&#1606;",
-								84 => "&#1575;&#1604;&#1575;&#1606;&#1588;&#1602;&#1575;&#1602;",
-								85 => "&#1575;&#1604;&#1576;&#1585;&#1608;&#1580;",
-								86 => "&#1575;&#1604;&#1591;&#1575;&#1585;&#1602;",
-								87 => "&#1575;&#1604;&#1575;&#1593;&#1604;&#1609;",
-								88 => "&#1575;&#1604;&#1594;&#1575;&#1588;&#1610;&#1577;",
-								89 => "&#1575;&#1604;&#1601;&#1580;&#1585;",
-								90 => "&#1575;&#1604;&#1576;&#1604;&#1583;",
-								91 => "&#1575;&#1604;&#1588;&#1605;&#1587;",
-								92 => "&#1575;&#1604;&#1604;&#1610;&#1604;",
-								93 => "&#1575;&#1604;&#1590;&#1581;&#1609;",
-								94 => "&#1575;&#1604;&#1588;&#1585;&#1581;",
-								95 => "&#1575;&#1604;&#1578;&#1610;&#1606;",
-								96 => "&#1575;&#1604;&#1593;&#1604;&#1602;",
-								97 => "&#1575;&#1604;&#1602;&#1583;&#1585;",
-								98 => "&#1575;&#1604;&#1576;&#1610;&#1606;&#1577;",
-								99 => "&#1575;&#1604;&#1586;&#1604;&#1586;&#1604;&#1577;",
-								100 => "&#1575;&#1604;&#1593;&#1575;&#1583;&#1610;&#1575;&#1578;",
-								101 => "&#1575;&#1604;&#1602;&#1575;&#1585;&#1593;&#1577;",
-								102 => "&#1575;&#1604;&#1578;&#1603;&#1575;&#1579;&#1585;",
-								103 => "&#1575;&#1604;&#1593;&#1589;&#1585;",
-								104 => "&#1575;&#1604;&#1607;&#1605;&#1586;&#1577;",
-								105 => "&#1575;&#1604;&#1601;&#1610;&#1604;",
-								106 => "&#1602;&#1585;&#1610;&#1588;",
-								107 => "&#1575;&#1604;&#1605;&#1575;&#1593;&#1608;&#1606;",
-								108 => "&#1575;&#1604;&#1603;&#1608;&#1579;&#1585;",
-								109 => "&#1575;&#1604;&#1603;&#1575;&#1601;&#1585;&#1608;&#1606;",
-								110 => "&#1575;&#1604;&#1606;&#1589;&#1585;",
-								111 => "&#1575;&#1604;&#1605;&#1587;&#1583;",
-								112 => "&#1575;&#1604;&#1575;&#1582;&#1604;&#1575;&#1589;",
-								113 => "&#1575;&#1604;&#1601;&#1604;&#1602;",
-								114 => "&#1575;&#1604;&#1606;&#1575;&#1587;"
-								);
+%surah_name = (
+						'Arabic' => [
+								"الفاتحة",
+								"البقرة",
+								"ال عمران",
+								"النساء",
+								"المائدة",
+								"الانعام",
+								"الاعراف",
+								"الانفال",
+								"التوبة",
+								"يونس",
+								"هود",
+								"يوسف",
+								"الرعد",
+								"ابراهيم",
+								"الحجر",
+								"النحل",
+								"الاسراء",
+								"الكهف",
+								"مريم",
+								"طه",
+								"الانبياء",
+								"الحج",
+								"المؤمنون",
+								"النور",
+								"الفرقان",
+								"الشعراء",
+								"النمل",
+								"القصص",
+								"العنكبوت",
+								"الروم",
+								"لقمان",
+								"السجدة",
+								"الاحزاب",
+								"سبأ",
+								"فاطر",
+								"يس",
+								"الصافات",
+								"ص",
+								"الزمر",
+								"غافر",
+								"فصلت",
+								"الشورى",
+								"الزخرف",
+								"الدخان",
+								"الجاثية",
+								"الاحقاف",
+								"محمد",
+								"الفتح",
+								"الحجرات",
+								"ق",
+								"الذاريات",
+								"الطور",
+								"النجم",
+								"القمر",
+								"الرحمن",
+								"الواقعة",
+								"الحديد",
+								"المجادلة",
+								"الحشر",
+								"الممتحنة",
+								"الصف",
+								"الجمعة",
+								"المنافقون",
+								"التغابن",
+								"الطلاق",
+								"التحريم",
+								"الملك",
+								"القلم",
+								"الحاقة",
+								"المعارج",
+								"نوح",
+								"الجن",
+								"المزمل",
+								"المدثر",
+								"القيامة",
+								"الانسان",
+								"المرسلات",
+								"النبا",
+								"النازعات",
+								"عبس",
+								"التكوير",
+								"الانفطار",
+								"المطففين",
+								"الانشقاق",
+								"البروج",
+								"الطارق",
+								"الاعلى",
+								"الغاشية",
+								"الفجر",
+								"البلد",
+								"الشمس",
+								"الليل",
+								"الضحى",
+								"الشرح",
+								"التين",
+								"العلق",
+								"القدر",
+								"البينة",
+								"الزلزلة",
+								"العاديات",
+								"القارعة",
+								"التكاثر",
+								"العصر",
+								"الهمزة",
+								"الفيل",
+								"قريش",
+								"الماعون",
+								"الكوثر",
+								"الكافرون",
+								"النصر",
+								"المسد",
+								"الاخلاص",
+								"الفلق",
+								"الناس"
+							],
 
-our @surah_name = (
+					'English' => [
 								"Al-Fatiha",
 								"Al-Baqarah",
 								"Al-'Imran",
@@ -393,7 +393,8 @@ our @surah_name = (
 								"Al-Ikhlaas",
 								"Al-Falaq",
 								"An-Naas"
-							);
+							]
+						);
 
 our @surah_ayah_count = (7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,
 										135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,
@@ -405,48 +406,38 @@ sub new {
 my ($class, %args) = @_;
     
 	my $self = bless {}, $class;
-	
-	$self->{Unicode} = $args{Unicode}? 1: 0;
 	$self->{Language} = $args{Language}? $args{Language}: 'Arabic';
-	
 	$self->{DatabasePath} = $args{DatabasePath}? $args{DatabasePath}: $INC{"Religion/Islam/Quran.pm"};
 	$self->{DatabasePath} =~ s/\.pm$//;
-	croak("Can't find base directory of Religion::Islam::Quran!") unless $self->{DatabasePath};
-	
-	if ($self->{Unicode}) {
-			$self->{DatabaseFile} = "$self->{DatabasePath}/" ."Quran". $self->{Language} ."Unicode.txt";
-	}
-	else {
-			$self->{DatabaseFile} = "$self->{DatabasePath}/"."Quran". $self->{Language} .".txt";
-	}
+	croak("Can't find base directory of Religion::Islam::Quran!") unless (-d $self->{DatabasePath});
+	$self->{DatabaseFile} = "$self->{DatabasePath}/"."Quran". $self->{Language} .".txt";
 	$self->_initialize;
     return $self;
 }
 #==========================================================
 sub _initialize{
-my ($self) = shift;
+my ($self) = @_;
 my ($line, $surah, $ayah, $description);
 	
-	
 	unless (-f $self->{DatabaseFile}) {croak ("Unable to find Quran Database file $self->{DatabaseFile}: $!.");}
-	open (IN, "$self->{DatabaseFile}") || croak("Unable to open Quran Database file $self->{DatabaseFile}: $!.");
+	open (IN, "<:encoding(UTF-8)", "$self->{DatabaseFile}") || croak("Unable to open Quran Database file $self->{DatabaseFile}: $!.");
 
-	undef %quran;
+	%quran = ();
 
 	while ($line = <IN>) {
-			chomp ($line);
-			($surah, $ayah, $description) = split(/\|/, $line);
-			$quran{"$surah\_$ayah"} = $description;
+		chomp ($line);
+		($surah, $ayah, $description) = split(/\|/, $line);
+		$quran{"$surah\_$ayah"} = $description;
 	}
 	close IN;
 	#----------------------------------------------------------------
-	undef @QuranLanguages;
-	opendir (DBdir, "$self->{DatabasePath}")  || croak("Unable to open Quran Database directory $self->{DatabasePath}: $!.");
+	@QuranLanguages = ();
+	opendir (DBdir, $self->{DatabasePath})  || croak("Unable to open Quran Database directory $self->{DatabasePath}: $!.");
 	while (my $file = readdir(DBdir)) {
-			if ($file eq "." || $file eq "..") {next;}
-			$file =~ s/\.txt$//;
-			$file =~ s/^Quran//;
-			push @QuranLanguages, $file;
+		if ($file eq "." || $file eq "..") {next;}
+		$file =~ s/\.txt$//;
+		$file =~ s/^Quran//;
+		push @QuranLanguages, $file;
 	}
 }
 #==========================================================
@@ -473,10 +464,23 @@ my ($self, $surah) = @_;
 }
 #==========================================================
 sub SurahName{
-my ($self, $surah) = @_;
+my ($self, $surah, $lang) = @_;
 	
 	if ($surah<1 || $surah>114) {return undef;}
-	return $surah_name[$surah-1];
+	$lang ||= $self->{Language} ||= "English";
+	if (!exists $surah_name{$lang}) {
+		$lang = "English";
+	}
+	return $surah_name{$lang}->[$surah-1];
+}
+#==========================================================
+sub SurahsNames{
+my ($self, $lang) = @_;
+	$lang ||= $self->{Language} ||= "English";
+	if (!exists $surah_name{$lang}) {
+		$lang = "English";
+	}
+	return @{$surah_name{$lang}};
 }
 #==========================================================
 sub Ayah{
@@ -487,11 +491,10 @@ my ($self, $surah, $ayah) = @_;
 #==========================================================
 sub Ayats{
 my ($self, $surah, $fromayah, $toayah) = @_;
-my (@ayats, $ayats, $temp, $ayah, $counter);
+my (@ayats, $ayats, $ayah, $counter);
 	
 	wantarray || return undef;
 
-	undef @ayats;
 	if ($surah<1 || $surah>114) {return undef;}
 	$ayats = $surah_ayah_count[$surah-1];
 	
@@ -499,23 +502,20 @@ my (@ayats, $ayats, $temp, $ayah, $counter);
 	if ($toayah<1 || $toayah>$ayats) {return undef;}
 
 	if ($fromayah > $toayah) {
-			$temp = $toayah;
-			$toayah = $fromayah;
-			$fromayah = $temp;
+		($fromayah, $toayah) = ($toayah, $fromayah);
 	}
 	
 	$counter = 0;
 	for $ayah($fromayah..$toayah) {
-			$ayats[$counter++] = $quran{"$surah\_$ayah"};
+		$ayats[$counter++] = $quran{"$surah\_$ayah"};
 	}
 	return @ayats;
 }
 #==========================================================
 sub AyatsHash{
 my ($self, $surah, $fromayah, $toayah) = @_;
-my (%ayats, $ayats, $temp, $ayah, $counter);
+my (%ayats, $ayats, $ayah, $counter);
 	
-	undef %ayats;
 	if ($surah<1 || $surah>114) {return undef;}
 	$ayats = $surah_ayah_count[$surah-1];
 	
@@ -523,31 +523,28 @@ my (%ayats, $ayats, $temp, $ayah, $counter);
 	if ($toayah<1 || $toayah>$ayats) {return undef;}
 
 	if ($fromayah > $toayah) {
-			$temp = $toayah;
-			$toayah = $fromayah;
-			$fromayah = $temp;
+		($fromayah, $toayah) = ($toayah, $fromayah);
 	}
 	
 	$counter = 0;
 	for $ayah($fromayah..$toayah) {
-			$ayats{$ayah} = $quran{"$surah\_$ayah"};
+		$ayats{$ayah} = $quran{"$surah\_$ayah"};
 	}
 	return %ayats;
 }
 #==========================================================
 sub SearchSurah{
 my ($self, $surah, $findwhat) = @_;
-my (@ayats, $ayats, $temp, $ayah, $counter);
+my (@ayats, $ayats, $ayah, $counter);
 	
-	undef @ayats;
 	if ($surah<1 || $surah>114) {return undef;}
 	$ayats = $surah_ayah_count[$surah-1];
 	
 	$counter = 0;
 	for $ayah(1..$ayats) {
-			if ($quran{"$surah\_$ayah"} =~ m/$findwhat/i) {
-					$ayats[$counter++] = $ayah;
-			}
+		if ($quran{"$surah\_$ayah"} =~ m/$findwhat/i) {
+			$ayats[$counter++] = $ayah;
+		}
 	}
 	return @ayats;
 }
@@ -558,16 +555,10 @@ my (@surah, $ayats, $ayah);
 
 	if ($surah<1 || $surah>114) {return undef;}
 	$ayats = $surah_ayah_count[$surah-1];
-	undef @surah;
 	for $ayah(1..$ayats) {
 		$surah[$ayah] = $quran{"$surah\_$ayah"};
 	}
 	return @surah;
-}
-#==========================================================
-sub SurahsNames{
-my ($self) = @_;
-	return @surah_name;
 }
 #==========================================================
 sub SurahsAyats{
@@ -616,10 +607,10 @@ my ($self, $surah, $ayah) = @_;
 	
 	if ($surah<1 || $surah>114) {return 0;}
 	if ($SajdahCompulsaryAyats{$surah} eq $ayah ) {
-			return 1;
+		return 1;
 	}
 	else {
-			return 0;
+		return 0;
 	}
 }
 #==========================================================
@@ -633,17 +624,11 @@ my ($self, $surah, $ayah) = @_;
 	
 	if ($surah<1 || $surah>114) {return 0;}
 	if ($SajdahRecommendedAyats{$surah} eq $ayah ) {
-			return 1;
+		return 1;
 	}
 	else {
-			return 0;
+		return 0;
 	}
-}
-#==========================================================
-sub SurahNameArabicUnicode{
-my ($self, $surah) = @_;
-	if ($surah<1 || $surah>114) {return undef;}
-	return $SurahNameArabicUnicode{$surah};
 }
 #==========================================================
 sub SurahOrderOfRevelation{
@@ -666,15 +651,15 @@ my (@medinah) = (2, 3, 4, 5, 8, 9, 13, 22, 24, 33, 47, 48, 49, 55, 57, 58, 59, 6
 
 	if ($surah<1 || $surah>114) {return undef;}
 	foreach my $medinah (@medinah) {
-			if ($medinah == $surah) {
-					return 1; # Revealed in Medinah
-			}
+		if ($medinah == $surah) {
+			return 1; # Revealed in Medinah
+		}
 	}
 	return 0; # Revealed in Makkah
 }
 #==========================================================
 sub RemoveDiacritic {
-my ($text) = @_;
+my ($self, $text) = @_;
 
 	#Windows Arabic (1256) 
 	#$Text =~ s/\xF0//g;		#ARABIC FATHATAN
@@ -686,7 +671,7 @@ my ($text) = @_;
 	#$Text =~ s/\xF8//g;		#ARABIC SHADDA
 	#$Text =~ s/\xFA//g;	#ARABIC SUKUN
 	$text =~ s/\xF0|\xF1|\xF2|\xF3|\xF5|\xF6|\xF8|\xFA//g;
-	#Allah Isolated form: ���  = \x{e1}\x{e1}\x{e5}, = Unicode &#65010; = &#xFDF2; = &#1604;&#1604;&#1607;
+	#Allah Isolated form: ���  = \x{e1}\x{e1}\x{e5}, = Unicode &#65010; = &#xFDF2; = &#1604;&#1604;&#1607;
 
 	# 1256  - Uindex - UISOname 
 	#	F0 064B ARABIC FATHATAN 
@@ -720,28 +705,26 @@ my ($text) = @_;
 	#http://www.microsoft.com/typography/unicode/1256.htm
 	
 	$text =~ s/\&\#1611\;|\&\#1612\;|\&\#1613\;|\&\#1614\;|\&\#1615\;|\&\#1616\;|\&\#1617\;|\&\#1618\;//g;
-
 	return $text;
 }
 #==========================================================
 #==========================================================
 1;
-__END__
 
 =head1 NAME
 
-Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in both text and unicode formats
+Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in utf-8 unicode format
 
 =head1 SYNOPSIS
 
 	#---------------------------------------------------------------
 	use Religion::Islam::Quran;
 	#---------------------------------------------------------------
-	#create new object with default options, Arabic language, none unicode
+	#create new object with default options, Arabic language
 	my $quran = Religion::Islam::Quran->new();
 
-	# or for unicode format and select the Arabic Language:
-	my $quran = Religion::Islam::Quran->new(Unicode => 1, Language=>'Arabic');
+	# or select the English Language:
+	my $quran = Religion::Islam::Quran->new(Language=>'English');
 	
 	# you can also specifiy your own database files path:
 	my $quran = Religion::Islam::Quran->new(DatabasePath => './Quran/mydatabase');
@@ -763,9 +746,9 @@ Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in bo
 	$surah_ayats = $quran->SurahAyahCount($surah_number);
 	#---------------------------------------------------------------
 	# returns the surah name using the surah number from 1 to 114.
-	$surah_name = $quran->SurahName($surah_number);
+	$surah_name = $quran->SurahName($surah_number, $optional_language);
 	#---------------------------------------------------------------
-	# returns Quran text of specific surah ayah .
+	# returns Quran text of specific surah ayah.
 	$ayah = $quran->Ayah($surah_number, $ayah_number);
 	#---------------------------------------------------------------
 	# returns Quran text of specific surah ayah range in an array .
@@ -773,9 +756,6 @@ Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in bo
 	#---------------------------------------------------------------
 	# returns all the Quran text of specific surah in an array.
 	@ayats = $quran->Surah($surah_number);
-	#---------------------------------------------------------------
-	# returns the surah number using the surah name in Quran sort.
-	$surah_number = $quran->surah_number($surah_name);
 	#---------------------------------------------------------------
 	# returns the names of each surah in the Quran sort order.
 	@surahs_name = $quran->SurahsNames();
@@ -811,8 +791,6 @@ Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in bo
 	#Return 1 for Medinah and 0 for Mekkah
 	print $quran->SurahRevelation($surah);
 
-	print $quran->SurahNameArabicUnicode($surah);
-
 =head1 DESCRIPTION
 
 This module contains the full Holy Quran Book database searchable 
@@ -822,26 +800,78 @@ Quran database files are simply text files pipe separated each line is formated 
 
 <SurahNumber>|<AyahNumber>|<AyahText><CRLF>
 
+Example of Arabic database file first Surah QuranArabic.txt:
+
+		1|1|بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيمِ
+		1|2|الْحَمْدُ للّهِ رَبِّ الْعَالَمِينَ
+		1|3|الرَّحْمنِ الرَّحِيمِ
+		1|4|مَلِكِ يَوْمِ الدِّينِ
+		1|5|إِيَّاكَ نَعْبُدُ وإِيَّاكَ نَسْتَعِينُ
+		1|6|اهدِنَا الصِّرَاطَ المُستَقِيمَ
+		1|7|صِرَاطَ الَّذِينَ أَنعَمتَ عَلَيهِمْ غَيرِ المَغضُوبِ عَلَيهِمْ وَلاَ الضَّالِّينَ
+
+and the 112th Surah in QuranEnglish.txt:
+
+		112|1|Say: He is Allah, the One and Only; 
+		112|2|Allah, the Eternal, Absolute; 
+		112|3|He begetteth not, nor is He begotten; 
+		112|4|And there is none like unto Him. 
+
 Database text files located in the module directory /Religion/Islam/Quran.
 Default  module comes with the Quran Arabic and some other translations.
 You can download more quran translations and transliterations from www.islamware.com.
+
+Languages and databases included with the module are:
+
+	Albanian
+	Arabic
+	Azerbaijani
+	Chinese
+	Dutch
+	English
+	EnglishUS
+	Finnish
+	French
+	German
+	Harun
+	Indonesian
+	Italian
+	Japanese
+	Latin
+	Malaysian
+	Mexican
+	Persian
+	Poland
+	Portuguese
+	Russian
+	Spanish
+	Swahili
+	Tamil
+	Thai
+	Turkish
+
+	EnglishTransliteration
+
+Surah names are only available in English and Arabic languages.
 
 =head2 Methods
 
 =head1 SEE ALSO
 
+L<Date::HijriDate>
 L<Religion::Islam::Qibla>
+L<Religion::Islam::PrayTime>
 L<Religion::Islam::PrayerTimes>
 
 =head1 AUTHOR
 
-Ahmed Amin Elsheshtawy,  <support@islamware.com>
-Website: http://www.islamware.com
+Ahmed Amin Elsheshtawy,  <support@islamware.com> <support@mewsoft.com>
+Website: http://www.islamware.com   http://www.mewsoft.com
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006 by Ahmed Amin Elsheshtawy support@islamware.com,
-L<http://www.islamware.com>
+Copyright (C) 2006-2013 by Ahmed Amin Elsheshtawy support@islamware.com, support@mewsoft.com
+L<http://www.islamware.com>  L<http://www.mewsoft.com>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
