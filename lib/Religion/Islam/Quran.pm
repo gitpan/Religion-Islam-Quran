@@ -12,11 +12,12 @@ use Carp;
 use strict;
 use warnings;
 use Exporter;
+use utf8;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw();
 
-our $VERSION = '2.0';
+our $VERSION = '2.01';
 our %quran;
 our %OrderOfRevelation;
 our @QuranLanguages;
@@ -711,6 +712,8 @@ my ($self, $text) = @_;
 #==========================================================
 1;
 
+=encoding utf-8
+
 =head1 NAME
 
 Religion::Islam::Quran - Holy Quran book searchable database multi-lingual in utf-8 unicode format
@@ -802,20 +805,20 @@ Quran database files are simply text files pipe separated each line is formated 
 
 Example of Arabic database file first Surah QuranArabic.txt:
 
-		1|1|بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيمِ
-		1|2|الْحَمْدُ للّهِ رَبِّ الْعَالَمِينَ
-		1|3|الرَّحْمنِ الرَّحِيمِ
-		1|4|مَلِكِ يَوْمِ الدِّينِ
-		1|5|إِيَّاكَ نَعْبُدُ وإِيَّاكَ نَسْتَعِينُ
-		1|6|اهدِنَا الصِّرَاطَ المُستَقِيمَ
-		1|7|صِرَاطَ الَّذِينَ أَنعَمتَ عَلَيهِمْ غَيرِ المَغضُوبِ عَلَيهِمْ وَلاَ الضَّالِّينَ
+	1|1|بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيمِ
+	1|2|الْحَمْدُ للّهِ رَبِّ الْعَالَمِينَ
+	1|3|الرَّحْمنِ الرَّحِيمِ
+	1|4|مَلِكِ يَوْمِ الدِّينِ
+	1|5|إِيَّاكَ نَعْبُدُ وإِيَّاكَ نَسْتَعِينُ
+	1|6|اهدِنَا الصِّرَاطَ المُستَقِيمَ
+	1|7|صِرَاطَ الَّذِينَ أَنعَمتَ عَلَيهِمْ غَيرِ المَغضُوبِ عَلَيهِمْ وَلاَ الضَّالِّينَ
 
 and the 112th Surah in QuranEnglish.txt:
 
-		112|1|Say: He is Allah, the One and Only; 
-		112|2|Allah, the Eternal, Absolute; 
-		112|3|He begetteth not, nor is He begotten; 
-		112|4|And there is none like unto Him. 
+	112|1|Say: He is Allah, the One and Only; 
+	112|2|Allah, the Eternal, Absolute; 
+	112|3|He begetteth not, nor is He begotten; 
+	112|4|And there is none like unto Him. 
 
 Database text files located in the module directory /Religion/Islam/Quran.
 Default  module comes with the Quran Arabic and some other translations.
